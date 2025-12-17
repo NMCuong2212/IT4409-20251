@@ -1,0 +1,11 @@
+BackEnd:
+-Chuẩn hóa: Từ dữ liệu body trim() để cắt khoảng trắng và toLowerCase để điều chỉnh chữ cái in thường
+-Email duy nhất: Tạo biến exist = user.findOne(email) nếu tìm được chứng tỏ mail đã tồn tại và trả về status(400) 
+không thể thêm
+-Promise.all cho query song song → find + countDocuments cùng lúc để nhanh hơn
+
+FrontEnd:
+-Chuẩn hóa: Từ dữ liệu body trim() để cắt khoảng trắng và toLowerCase để điều chỉnh chữ cái in thường
+-Truyền page và limit và Pagination(...,page,limit) số thứ tự sẽ đánh theo (page-1)*limit + index +1
+-Reset page về 1 khi đổi limit → tránh hiển thị page ngoài range bằng các set trong lúc handle nếu limit thay đổi sẽ setPage(1) và limit mới
+-Xử lý lỗi chi tiết → backend trả status 400, 404, 500 + message rõ ràng sử dụng alert để in ra message
