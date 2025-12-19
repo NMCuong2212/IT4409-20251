@@ -22,7 +22,8 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/it4409:latest
+          file: Dockerfile
+          tags: nmc2212/it4409-sample:staging
 
   deploy:
     needs: build-and-push
