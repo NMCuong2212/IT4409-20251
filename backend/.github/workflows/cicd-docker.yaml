@@ -22,8 +22,9 @@ jobs:
         with:
           context: .
           push: true
-          file: Dockerfile
-          tags: nmc2212/it4409-sample:staging
+          file: ./Dockerfile
+          # Dùng biến secret cho username để bảo mật và đồng nhất tên image
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/it4409-sample:latest
 
   deploy:
     needs: build-and-push
@@ -36,7 +37,8 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
-            docker stop my-app || true
-            docker rm my-app || true
-            docker run -d --name my-app -p 80:3000 ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            # Tên image ở đây phải khớp hoàn toàn với bước Build ở trên
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/it4409-sample:latest
+            docker stop it4409-app || true
+            docker rm it4409-app || true
+            docker run -d --name it4409-app -p 80:3000 ${{ secrets.DOCKERHUB_USERNAME }}/it4409-sample:latest
